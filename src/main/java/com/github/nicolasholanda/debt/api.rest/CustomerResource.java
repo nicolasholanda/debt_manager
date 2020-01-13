@@ -12,6 +12,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import static com.github.nicolasholanda.debt.model.filter.QueryFilter.queryFilter;
+import static com.github.nicolasholanda.debt.util.ResourceUtils.buildPaginatedResponse;
+import static com.github.nicolasholanda.debt.util.ResourceUtils.validateOrder;
+import static io.vavr.API.List;
 import static javax.ws.rs.core.Response.Status.CONFLICT;
 import static javax.ws.rs.core.Response.*;
 
@@ -25,6 +29,16 @@ public class CustomerResource {
 
     @Inject
     private CustomerService service;
+
+    @GET
+    public Response findAllPaginated(@QueryParam("filtro") @DefaultValue("") String filter,
+                                     @QueryParam("ordem") @DefaultValue("name") String order,
+                                     @QueryParam("inicio") @DefaultValue("0") @Min(0) Integer offset,
+                                     @QueryParam("limite") @DefaultValue("9999") @Min(1) Integer limit) {
+        var finalOrder = validateOrder(order, List("name"));
+        var queryFilter = queryFilter(filter, order, offset, limit);
+        return buildPaginatedResponse(service.findPaginatedBy(queryFilter, finalOrder), queryFilter).build();
+    }
 
     @GET
     @Path("/{id:[0-9]*}")
