@@ -2,9 +2,8 @@ package com.github.nicolasholanda.debt.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
@@ -14,7 +13,8 @@ public class Product extends BaseEntity<Integer> {
 
     @JsonProperty("name")
     @Column(name = "name", nullable = false, unique = true)
-    @Size(min = 3, max = 100, message = "{product.name.size}")
+    @NotNull(message = "{product.name.notnull}")
+    @Size(min = 3, max = 300, message = "{product.name.size}")
     private String name;
 
     @JsonProperty("price")
@@ -24,12 +24,19 @@ public class Product extends BaseEntity<Integer> {
 
     @JsonProperty("description")
     @Column(name = "description", nullable = false)
-    @Size(min = 3, max = 250, message = "{product.description.size}")
+    @NotNull(message = "{product.descriptio.notnull}")
+    @Size(min = 3, max = 1000, message = "{product.description.size}")
     private String description;
 
     @JsonProperty("available")
-    @Column(name = "available", nullable = false)
+    @Column(name = "available")
     private boolean available = true;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id", foreignKey = @ForeignKey(name = "fk_brand"))
+    @JsonProperty("brand")
+    @NotNull(message = "{product.brand.notnull}")
+    private Brand brand;
 
     public Product() {
     }
