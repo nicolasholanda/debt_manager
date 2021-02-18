@@ -15,7 +15,7 @@
         <java.version>11</java.version>
         <vavr.version>0.10.2</vavr.version>
         <java-ee.version>8.0</java-ee.version>
-        <jackson.version>2.10.1</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
         <deltaspike.version>1.9.2</deltaspike.version>
         <jersey-client.version>2.29.1</jersey-client.version>
         <resteasy-jaxrs.version>3.6.1.Final</resteasy-jaxrs.version>
