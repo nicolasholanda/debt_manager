@@ -19,7 +19,7 @@
         <deltaspike.version>1.9.2</deltaspike.version>
         <jersey-client.version>2.29.1</jersey-client.version>
         <resteasy-jaxrs.version>3.6.1.Final</resteasy-jaxrs.version>
-        <hibernate-core.version>5.4.10.Final</hibernate-core.version>
+        <hibernate-core.version>5.4.24.Final</hibernate-core.version>
         <jackson-jaxrs-json-provider.version>2.10.1</jackson-jaxrs-json-provider.version>
         <resteasy-jackson2-provider.version>3.6.1.Final</resteasy-jackson2-provider.version>
 
